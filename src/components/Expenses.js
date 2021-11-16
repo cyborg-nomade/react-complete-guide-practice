@@ -1,4 +1,4 @@
-import ExpenseItem from "../components/ExpenseItem";
+import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 
 import React from "react";
