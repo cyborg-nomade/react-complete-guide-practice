@@ -10,11 +10,15 @@ const NewExpense = (props) => {
     };
 
     props.onAddExpense(expenseData);
+    props.isToggledAddExpense = false;
   };
 
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      <ExpenseForm
+        isToggledAddExpense={props.isToggledAddExpense}
+        onSaveExpenseData={saveExpenseDataHandler}
+      />
     </div>
   );
 };

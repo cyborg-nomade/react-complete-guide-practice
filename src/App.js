@@ -27,6 +27,7 @@ const DUMMY_EXPENSES = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [showAddExpenses, setShowAddExpenses] = useState(false);
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
@@ -34,10 +35,29 @@ const App = () => {
     });
   };
 
+  const newExpensesButtonHandler = () => {
+    setShowAddExpenses(true);
+  };
+
+  let newExpensesContent = (
+    <div className="new-expense">
+      <button onClick={newExpensesButtonHandler}>Hi</button>
+    </div>
+  );
+
+  if (showAddExpenses) {
+    newExpensesContent = (
+      <NewExpense
+        isToggledAddExpense={showAddExpenses}
+        onAddExpense={addExpenseHandler}
+      />
+    );
+  }
+
   return (
     <div>
       <h2>Let's get started!</h2>
-      <NewExpense onAddExpense={addExpenseHandler} />
+      {newExpensesContent}
       <Expenses expenses={expenses} />
     </div>
   );
