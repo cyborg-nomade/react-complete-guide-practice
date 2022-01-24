@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import QuoteItem from "./QuoteItem";
 import classes from "./QuoteList.module.css";
-import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const sortQuotes = (quotes, ascending) => {
   return quotes.sort((quoteA, quoteB) => {
