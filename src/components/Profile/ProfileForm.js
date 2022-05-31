@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import AuthContext from "../store/auth-context";
+import AuthContext from "../../store/auth-context";
 
 import classes from "./ProfileForm.module.css";
 import { useHistory } from "react-router-dom";

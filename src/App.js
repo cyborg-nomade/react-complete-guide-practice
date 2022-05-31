@@ -5,7 +5,7 @@ import UserProfile from "./components/Profile/UserProfile";
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import { useContext } from "react";
-import AuthContext from "./components/store/auth-context";
+import AuthContext from "./store/auth-context";
 
 function App() {
   const authContext = useContext(AuthContext);
