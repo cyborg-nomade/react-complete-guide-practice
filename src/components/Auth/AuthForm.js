@@ -22,7 +22,7 @@ const AuthForm = () => {
     event.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
 
     // optional: add validation
     setIsLoading(true);
