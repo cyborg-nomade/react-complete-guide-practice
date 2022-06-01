@@ -12,7 +12,7 @@ const handler = async (req, res) => {
 
     try {
       const client = await MongoClient.connect(
-        "mongodb://localhost:27017/meetups"
+        "mongodb+srv://next-api:06MoQS9Bk6b7rpEj@cluster0.x8t1a.mongodb.net/meetups?retryWrites=true&w=majority"
       );
 
       const db = client.db();
