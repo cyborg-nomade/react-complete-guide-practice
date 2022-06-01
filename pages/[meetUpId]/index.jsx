@@ -1,9 +1,18 @@
 import React from "react";
+import Head from "next/head";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { MongoClient, ObjectId } from "mongodb";
 
 const MeetupDetails = (props) => {
-  return <MeetupDetail {...props.meetupData} />;
+  return (
+    <React.Fragment>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name="description" content={props.meetupData.description} />
+      </Head>
+      <MeetupDetail {...props.meetupData} />
+    </React.Fragment>
+  );
 };
 
 export const getStaticPaths = async () => {
