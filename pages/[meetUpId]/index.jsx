@@ -1,7 +1,7 @@
 import React from "react";
 import MeetupDetail from "./../../components/meetups/MeetupDetail";
 
-const MeetupDetails = () => {
+const MeetupDetails = (props) => {
   return (
     <MeetupDetail
       image="https://upload.wikimedia.org/wikipedia/commons/c/c2/001_Jundia%C3%AD.jpg"
@@ -10,6 +10,27 @@ const MeetupDetails = () => {
       description="A meetup"
     />
   );
+};
+
+export const getStaticProps = async (context) => {
+  // fetch data for a single meetup
+
+  const meetupId = context.params.meetupId;
+
+  console.log(meetupId);
+
+  return {
+    props: {
+      meetupData: {
+        id: meetupId,
+        image:
+          "https://upload.wikimedia.org/wikipedia/commons/c/c2/001_Jundia%C3%AD.jpg",
+        title: "A First Meetup",
+        address: "Some City 5, Some Street",
+        description: "A meetup",
+      },
+    },
+  };
 };
 
 export default MeetupDetails;
