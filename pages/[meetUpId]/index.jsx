@@ -1,32 +1,28 @@
 import React from "react";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
+import { MongoClient, ObjectId } from "mongodb";
 
 const MeetupDetails = (props) => {
-  return (
-    <MeetupDetail
-      image="https://upload.wikimedia.org/wikipedia/commons/c/c2/001_Jundia%C3%AD.jpg"
-      title="A First Meetup"
-      address="Some City 5, Some Street"
-      description="A meetup"
-    />
-  );
+  return <MeetupDetail {...props.meetupData} />;
 };
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
+  const client = await MongoClient.connect("mongodb://localhost:27017/meetups");
+  const db = client.db();
+  const meetupsCollections = db.collection("meetups");
+
+  const meetups = await meetupsCollections.find({}, { _id: 1 }).toArray();
+  console.log(meetups);
+
+  client.close();
+
   return {
     fallback: false,
-    paths: [
-      {
-        params: {
-          meetupId: "m1",
-        },
+    paths: meetups.map((meetup) => ({
+      params: {
+        meetupId: meetup._id.toString(),
       },
-      {
-        params: {
-          meetupId: "m2",
-        },
-      },
-    ],
+    })),
   };
 };
 
@@ -35,15 +31,25 @@ export const getStaticProps = async (context) => {
 
   const meetupId = context.params.meetupId;
 
+  const client = await MongoClient.connect("mongodb://localhost:27017/meetups");
+  const db = client.db();
+  const meetupsCollections = db.collection("meetups");
+
+  const selectedMeetup = await meetupsCollections.findOne({
+    _id: ObjectId(meetupId),
+  });
+  console.log(selectedMeetup);
+
+  client.close();
+
   return {
     props: {
       meetupData: {
-        id: meetupId,
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/c/c2/001_Jundia%C3%AD.jpg",
-        title: "A First Meetup",
-        address: "Some City 5, Some Street",
-        description: "A meetup",
+        id: selectedMeetup._id.toString(),
+        image: selectedMeetup.data.image,
+        title: selectedMeetup.data.title,
+        address: selectedMeetup.data.address,
+        description: selectedMeetup.data.description,
       },
     },
   };
