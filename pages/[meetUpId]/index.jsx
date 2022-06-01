@@ -1,5 +1,5 @@
 import React from "react";
-import MeetupDetail from "./../../components/meetups/MeetupDetail";
+import MeetupDetail from "../../components/meetups/MeetupDetail";
 
 const MeetupDetails = (props) => {
   return (
@@ -12,12 +12,28 @@ const MeetupDetails = (props) => {
   );
 };
 
+export const getStaticPaths = () => {
+  return {
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: "m1",
+        },
+      },
+      {
+        params: {
+          meetupId: "m2",
+        },
+      },
+    ],
+  };
+};
+
 export const getStaticProps = async (context) => {
   // fetch data for a single meetup
 
   const meetupId = context.params.meetupId;
-
-  console.log(meetupId);
 
   return {
     props: {
