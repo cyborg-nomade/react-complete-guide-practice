@@ -23,7 +23,6 @@ export const getStaticPaths = async () => {
   const meetupsCollections = db.collection("meetups");
 
   const meetups = await meetupsCollections.find({}, { _id: 1 }).toArray();
-  console.log(meetups);
 
   client.close();
 
@@ -42,14 +41,15 @@ export const getStaticProps = async (context) => {
 
   const meetupId = context.params.meetupId;
 
-  const client = await MongoClient.connect("mongodb://localhost:27017/meetups");
+  const client = await MongoClient.connect(
+    "mongodb+srv://next-api:06MoQS9Bk6b7rpEj@cluster0.x8t1a.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
   const db = client.db();
   const meetupsCollections = db.collection("meetups");
 
   const selectedMeetup = await meetupsCollections.findOne({
     _id: ObjectId(meetupId),
   });
-  console.log(selectedMeetup);
 
   client.close();
 
