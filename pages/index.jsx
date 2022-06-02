@@ -4,6 +4,7 @@ import MeetupList from "../components/meetups/MeetupList";
 import { MongoClient } from "mongodb";
 
 const HomePage = (props) => {
+  console.log(props);
   return (
     <React.Fragment>
       <Head>
